@@ -1,0 +1,38 @@
+# System packages (.deb, .rpm, .apk, Arch) for alienwave, built by nfpm from
+# the same static Linux build as the av archive. The release workflow sets
+# VERSION, RELEASE (our packaging release) and ARCH (amd64 or arm64).
+#
+# No .desktop file on purpose: av is the one place titles are started from,
+# so Asciiverse packages never add menu entries (asciiverse/CLAUDE.md).
+name: alienwave
+arch: ${ARCH}
+platform: linux
+version: ${VERSION}
+release: ${RELEASE}
+section: games
+priority: optional
+maintainer: Asciiverse <packages@asciiverse.sh>
+vendor: Asciiverse
+homepage: https://github.com/theasciiverse/alienwave
+license: GPL-2.0-or-later
+description: |
+  Shoot down the zorxian waves and their queen, Xzarna.
+  A vertical shoot-'em-up for the terminal: lasers, a shield that stays
+  where you raise it, and a queen who lays eggs. Needs 80x25 or more.
+  Alienwave 0.4.0 by Alessandro Pira, with fixes, packaged by Asciiverse.
+contents:
+  - src: alienwave
+    dst: /usr/bin/alienwave
+    file_info: { mode: 0755 }
+  - src: COPYING
+    dst: /usr/share/doc/alienwave/copyright
+    file_info: { mode: 0644 }
+  - src: README
+    dst: /usr/share/doc/alienwave/README
+    file_info: { mode: 0644 }
+  - src: STORY
+    dst: /usr/share/doc/alienwave/STORY
+    file_info: { mode: 0644 }
+  - src: PATCHES.md
+    dst: /usr/share/doc/alienwave/PATCHES.md
+    file_info: { mode: 0644 }
