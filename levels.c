@@ -66,7 +66,7 @@ extern const bitmask bitmask_tiny_alien;
 #define MOVE_DIAGONAL  3
 #define MOVE_SERPENT   4
 
-char level_1[] = {
+signed char level_1[] = {
 0x00,0x00, 0, AT_LITTLE, 39,-5, 0, MOVE_STRAIGHT, -1,
 0x00,0x04, 1, AT_LITTLE, 39,-5, 0, MOVE_STRAIGHT, -1,
 0x00,0x08, 2, AT_LITTLE, 39,-5, 0, MOVE_STRAIGHT, -1,
@@ -118,7 +118,7 @@ char level_1[] = {
 0x01,0x60, 0, AT_NONE,    0, 0,  0, MOVE_STRAIGHT,  -1,
 };
 
-char level_2[] = {
+signed char level_2[] = {
 0x00,0x00, 0, AT_BALL,   48,-3,  0, MOVE_SERPENT, -1,
 0x00,0x02, 1, AT_TINY,   49,-3,  0, MOVE_SERPENT, -1,
 0x00,0x04, 2, AT_TINY,   49,-3,  0, MOVE_SERPENT, -1,
@@ -170,7 +170,7 @@ char level_2[] = {
 0x00,0xF5, 0, AT_NONE, 0,0,0, MOVE_STRAIGHT, -1,
 };
 
-char level_3[] = {
+signed char level_3[] = {
 0x00,0x00, 0, AT_SLIME,  3,-3,  70, MOVE_OSCILLATE, -1,
 0x00,0x0D, 1, AT_TINY,  19,11,  -1, MOVE_STRAIGHT,  0,
 0x00,0x10, 8, AT_LITTLE, 55,-3,  0, MOVE_STRAIGHT,  -1,
@@ -218,7 +218,7 @@ char level_3[] = {
 0x01,0x50, 0, AT_NONE, 0,0,0, MOVE_STRAIGHT, -1,
 };
 
-char level_4[] = {
+signed char level_4[] = {
 0x00,0x00, 2, AT_BIG,   12,-5,  -1, MOVE_STRAIGHT, -1,
 0x00,0x03, 3, AT_BIG,   45,-5,  -1, MOVE_STRAIGHT, -1,
 0x00,0x06, 4, AT_BIG,   75,-5,  -1, MOVE_STRAIGHT, -1,
@@ -256,7 +256,7 @@ char level_4[] = {
 0x00,0x7B, 0, AT_NONE, 0,0,0, MOVE_STRAIGHT, -1,
 };
 
-char *level;
+signed char *level;
 
 void init_levels()
 {
@@ -283,9 +283,9 @@ void init_levels()
 #endif
 }
 
-char *next_level(const char *actual)
+signed char *next_level(const signed char *actual)
 {
-	char *next=level_1;
+	signed char *next=level_1;
 #ifndef RANDOM_LEVELS
 // Sequential algorithm
 	if (actual==level_1) next = level_2;

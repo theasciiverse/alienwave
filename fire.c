@@ -16,7 +16,7 @@ void new_fire(int x, int y)
 	int n=0;
 	while ( (all_fires[n].x >= 0) && (++n<NUM_FIRES) ) ;
 
-	if (n<=NUM_FIRES)
+	if (n<NUM_FIRES)
 	{
 		all_fires[n].x = x;
 		all_fires[n].y = y;

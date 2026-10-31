@@ -29,6 +29,9 @@ int exploding=0; /* this will be >0 if the player's ship is exploding */
 
 void init_screen()
 {
+	/* Esc quits: don't wait a full second to see if it starts an arrow key */
+	if (getenv("ESCDELAY") == NULL)
+		setenv("ESCDELAY","25",1);
 	term = initscr(); /* Initialize terminal */
 
 	start_color(); /* Initialize colors */
@@ -80,16 +83,16 @@ void presentation()
 	wclear(term);
 }
 
-int pause()
+int pause_game()
 {
 	int overwritten[16];
 	int ch,i;
 
 	for (i=0;i<16;i++)
-		overwritten[i] = (int)mvwinch(term,10,31+i);
+		overwritten[i] = (int)mvwinch(term,10+y_ofs,31+i+x_ofs);
 
 	SET_COLOR(COL_RED);
-	mvwprintw(term,10,31," *** PAUSED *** ");
+	mvwprintw(term,10+y_ofs,31+x_ofs," *** PAUSED *** ");
 	SET_COLOR(COL_BKG);
 
 	wmove(term,0,0);
@@ -98,7 +101,7 @@ int pause()
 		;
 
 	for (i=0;i<16;i++)
-		mvwaddch(term,10,31+i,(chtype)overwritten[i]);
+		mvwaddch(term,10+y_ofs,31+i+x_ofs,(chtype)overwritten[i]);
 
 	if ((ch==KEY_ESC) || (ch=='Q'))
 	{
@@ -184,7 +187,7 @@ int move_ship()
 				break;
 			case 'p':
 			case 'P':
-				if (pause()<0)
+				if (pause_game()<0)
 				{
 					c='Q';
 				}
@@ -361,7 +364,7 @@ int main()
 	if (!right_size())
 	{
 		endwin();
-		fprintf(stderr,"Alienwave must be run in an 80x25 terminal!\n");
+		fprintf(stderr,"Alienwave needs a terminal of at least 80x25; this one is %dx%d.\n",term_x,term_y);
 		return -1;
 	}
 

@@ -1,7 +1,7 @@
 /* This file is part of Alienwave, a game by Alessandro Pira */
 
 #ifndef _ALIENS_H
-#define _ALEINS_H
+#define _ALIENS_H
 
 #define AT_NONE    -1
 #define AT_LAST    -2
